@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancha</title>
+</head>
+<body>
+    {% include 'navbar.html'%}
+    <h1>Cancha: {{nombre}}</h1>
+    <h2>Descripcion:
+    </h2>
+    <p>
+        {{descripcion}}
+    </p>
+    <h2>Horarios</h2>
+    {% if horarios|length > 0 %}
+        {% for horario in horarios %}
+            <div>
+                <form method="post" action="">
+                    <p>Inicio: {{ horario.hora_inicio|date:'Y-m-d, h:i:s'}}</p>
+                    <p>Fin: {{ horario.hora_fin|date:'Y-m-d, h:i:s'}}</p>
+                    <button type="submit">Reservar</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+            <p>No hay horarios disponibles.</p>
+    {% endif %}
+</body>
+</html>
