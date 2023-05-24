@@ -1,0 +1,44 @@
+{% extends "compra/base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Compra</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"><th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for compra in compras %}
+                        <tr>
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td>{{ compra.compra }}</td>
+                          <td>{{ compra.total }}</td>
+                          {% if compra.status == True %}
+                          <td>PAGADO</td>
+                          <td>
+                            <a class="text-white" href="/cancelar/{{ compra.id }}">
+                            <button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-xmark fa-sm"></i></button>
+                            </a>
+                          </td>
+                          {% else %}
+                          <td>CANCELADO</td>
+                          <td>
+                            <button type="button" class="btn btn-outline-danger" disabled><i class="fa-regular fa-ban fa-sm"></i></button>
+                          </td>
+                          {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    {% else %}
+        <div>No tienes tickets comprados.</div>
+    {% endif %}
+{% endblock content %}

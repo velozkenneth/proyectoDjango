@@ -1,0 +1,22 @@
+{% extends "compra/base.html" %}
+{% block content %}
+    <div class="container ">
+        <div class="card m-3 w-50 border border-secondary text-center position-absolute top-50 start-50 translate-middle">
+            <img src="../{{ concierto.poster }} " class="card-img-top img-fluid" alt="{{ concierto.titulo }}" height="400px" width="auto">
+            <div class="card-body">
+                <h5 class="card-title">{{ concierto.titulo }}</h5>
+                <p class="card-text">
+                    {{ concierto.descripcion }}
+                </p>
+                <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+                {% if user.is_authenticated %}
+                <a class="btn btn-outline-info" href="/compra/{{ concierto.id }}" role="button">Comprar</a>
+                {% else %}
+                <a class="btn btn-outline-info" href="/login" role="button">Inicie sesión para comprar</a>     
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends "compra/base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Ticket</th>
+                        <th scope="col">Compra</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in tickets %}
+                        <tr>
+                          {% comment %} <th scope="row">{{ forloop.counter }}</th> {% endcomment %}
+                          <td>{{ ticket.codigo }}</td>
+                          <td>{{ ticket.compra }}</td>
+                          <td>Activo</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+            <div>
+                <a class="text-white" href="/compras/">
+                    <button type="button" class="btn btn-outline-primary">Cancelar Compras</button>
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div>No tienes tickets comprados.</div>
+    {% endif %}
+{% endblock content %}

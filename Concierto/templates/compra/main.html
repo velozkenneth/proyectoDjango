@@ -1,0 +1,25 @@
+{% extends "compra/base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row row-cols-2 row-cols-md-2">
+    {% for concert in conciertos %}
+    <div class="col rounded">
+      <a class="navbar-brand text-dark" href="/concierto/{{ concert.id }}" >
+        <div class="card text-center w-80 m-2">
+          <img src="{{ concert.poster }}" class="card-img-top" alt="{{ concert.titulo }}" height="400px" width="auto">
+          <div class="card-body">
+            <h5 class="card-title">{{ concert.titulo }}</h5>
+            <p class="card-text">
+              {{ concert.artista }}
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock content %}
+{% block foot %}
+<div>Footer</div>
+{% endblock foot %}

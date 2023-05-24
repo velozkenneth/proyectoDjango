@@ -1,0 +1,22 @@
+{% extends "compra/base.html" %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center">
+    <div class="m-5 p-5 w-auto">
+        <h1>Login</h1>
+        <div class="p-2 border rounded border-secondary w-auto">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Iniciar sesión</button>
+            </form>
+        </div>
+        {% comment "Si no tienes cuenta registrate" %}
+        {% endcomment %}
+        <div class="d-flex justify-content-center align-items-center p-1">
+            <p>
+                No tienes cuenta aún? <b><a class="text-success text-decoration-none" href="/registro">Registrate</a></b>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "compra/base.html" %}
+{% block content %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+        {% elif message.tags == 'success' %}
+            <div class="alert alert-success" role="alert">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="m-5 p-5 w-auto">
+            <h1>Compra</h1>
+            <div class="p-2 border rounded border-secondary w-auto">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ compra_form.as_p }}
+                    <button type="submit">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
