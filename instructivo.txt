@@ -1,0 +1,15 @@
+INSTRUCTIVO PARA EJECUTAR EL PROYECTO
+
+- Crear un venv e instalar las dependencias "pip3 install -r requirements.txt".
+- Importar de la carpeta "Concierto_kveloz" toda la base de datos estructurada, hacerlo mediante Workbench. Nombre de la base a crear: "concierto".
+- Ejecutar el ambiente de entorno: python manage.py runserver.
+- El super usuario ya creado es "kveloza" y password: "Bootcamp2023".
+
+Datos sobre el proyecto:
+
+- Los conciertos ya estan creados, son 4.
+- Se puede modificar la fecha desde el portal de administracion con uso del superuser.
+- El concierto de "Feid" se coloco como ejemplo para comprar boletos pero que no puedas cancelar porque su fecha es el "31 de Mayo".
+
+
+
