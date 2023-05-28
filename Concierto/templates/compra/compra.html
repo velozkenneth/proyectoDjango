@@ -1,18 +1,17 @@
 {% extends "compra/base.html" %}
 {% block content %}
-    {% for message in messages %}
-        {% if message.tags == 'error' %}
-            <div class="alert alert-danger" role="alert">{{ message }}</div>
-        {% elif message.tags == 'success' %}
-            <div class="alert alert-success" role="alert">{{ message }}</div>
-        {% endif %}
-    {% endfor %}
     <div class="d-flex justify-content-center align-items-center">
         <div class="m-5 p-5 w-auto">
             <h1>Compra</h1>
-            <p>Concierto: <b>{{ concierto.titulo }}</b></p>
-            <p>Artista: <b>{{ concierto.artista }}</b></p>
-            <p>Precio/ticket: <b>{{ concierto.precio_ticket }}</b></p>            
+            <p>
+                Concierto: <b>{{ concierto.titulo }}</b>
+            </p>
+            <p>
+                Artista: <b>{{ concierto.artista }}</b>
+            </p>
+            <p>
+                Precio/ticket: <b>{{ concierto.precio_ticket }}</b>
+            </p>
             <div class="p-2 border rounded border-secondary w-auto">
                 <form method="post">
                     {% csrf_token %}

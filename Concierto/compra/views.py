@@ -68,7 +68,7 @@ def loginView(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"Ha iniciado sesion como: {username}")
+                messages.success(request, f"Ha iniciado sesion como: {username}")
                 return redirect('Home')
             messages.error(request, "Credenciales incorrectas")
         messages.error(request, "Datos proporcionados incorrectos")
@@ -115,9 +115,10 @@ def compraView(request, concierto_id):
                     last_codigo+=1
                     ticket = Ticket(codigo=last_codigo,compra=compra)
                     ticket.save()
-                print(c_concierto.capacidad)
+                #print(c_concierto.capacidad)
                 c_concierto.capacidad -= (c_num_tickets)
                 c_concierto.save()
+                messages.success(request, f"Felicidades! Has comprado {c_num_tickets} tickets para ver a {c_concierto.artista} en su gira {c_concierto.titulo}")
                 return redirect("Home")
             else:
                 messages.error(request, 'El número de tickets solicitados supera a la capacidad máxima')

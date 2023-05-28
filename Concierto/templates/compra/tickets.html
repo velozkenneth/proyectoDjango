@@ -1,12 +1,5 @@
 {% extends "compra/base.html" %}
 {% block content %}
-{% if messages %}
-<div class="messages">
-    {% for message in messages %}
-    <div{% if message.tags %} class="bg-{{ message.tags }} text-white"{% endif %}>{{ message }}</div>
-    {% endfor %}
-</div>
-{% endif %}
     {% if user.is_authenticated %}
         <div class="container">
             <div class="row justify-content-center">
