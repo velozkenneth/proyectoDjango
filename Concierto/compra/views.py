@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.utils.timezone import now
 # Create your views here.
 
-class MainView(TemplateView):
+class MainView(TemplateView): #Pantalla principal
     template_name = "compra/main.html"
 
     def get_context_data(self, **kwargs):
