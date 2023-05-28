@@ -31,19 +31,19 @@ class Ubicacion(models.Model):
     def __str__(self) -> str:
         return f"{self.ciudad}"
 
-class Ticket(models.Model):
-    codigo = models.IntegerField()
-    compra = models.ForeignKey("Compra",on_delete=models.CASCADE)
-
 class Compra(models.Model):
-    persona = models.ForeignKey('Persona', on_delete=models.PROTECT)
-    ubicacion = models.ForeignKey('Ubicacion', on_delete=models.PROTECT)
-    concierto = models.ForeignKey('Concierto', on_delete=models.PROTECT)
+    persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.PROTECT)
+    concierto = models.ForeignKey(Concierto, on_delete=models.PROTECT)
     fecha_compra = models.DateTimeField(default=now)
     num_tickets = models.PositiveIntegerField()
 
     def __str__(self) -> str:
         return f"{self.concierto}"
+
+class Ticket(models.Model):
+    codigo = models.IntegerField()
+    compra = models.ForeignKey(Compra,on_delete=models.CASCADE)
 
 class CompraStatus(models.Model):
     compra = models.ForeignKey(Compra, on_delete=models.PROTECT, related_name="compra")

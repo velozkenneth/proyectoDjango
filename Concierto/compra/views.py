@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, DetailView
 from .models import Concierto, Persona, Compra, Ubicacion, Ticket, CompraStatus
 from django.contrib import messages
+from django.utils.timezone import now
 # Create your views here.
 
 class MainView(TemplateView):
@@ -122,22 +123,30 @@ def compraView(request, concierto_id):
                 messages.error(request, 'El número de tickets solicitados supera a la capacidad máxima')
                 
     else:
+        c_concierto = Concierto.objects.get(id=concierto_id)
         compra_form = CompraForm(initial={"concierto" : concierto_id})
-    return render(request, "compra/compra.html", {"compra_form" : compra_form})
+    return render(request, "compra/compra.html", {"compra_form" : compra_form, "concierto" : c_concierto})
 
 def cancelarView(request,compra_status_id):
     compra_status = CompraStatus.objects.get(id=compra_status_id)
-    compra_status.status = False
-    compra = compra_status.compra
-    compra_status.save()
-    tickets = Ticket.objects.filter(compra=compra)
-    
-    #Actualiza la capacidad
-    concierto = Concierto.objects.get(id=compra.concierto.id)
-    concierto.capacidad += len(tickets)
-    concierto.save()
+    fecha_concierto = compra_status.compra.concierto.fecha
+    diferencia_dias = (fecha_concierto - now()).days
+    print("Dias para el concierto: \n",diferencia_dias)
+    if diferencia_dias>=2:
+        compra_status.status = False
+        compra = compra_status.compra
+        compra_status.save()
+        tickets = Ticket.objects.filter(compra=compra)
+        
+        #Actualiza la capacidad
+        concierto = Concierto.objects.get(id=compra.concierto.id)
+        concierto.capacidad += len(tickets)
+        concierto.save()
 
-    #Borra los tickets
-    tickets.delete()
-
+        #Borra los tickets
+        tickets.delete()
+        messages.success(request, "Has cancelado correctamente")
+    else:
+        messages.info(request,"Lo sentimos, solo puedes cancelar hasta 2 dias antes del concierto.")
     return redirect('Tickets')
+    

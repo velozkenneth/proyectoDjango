@@ -1,14 +1,20 @@
 {% extends "compra/base.html" %}
 {% block content %}
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div{% if message.tags %} class="bg-{{ message.tags }} text-white"{% endif %}>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
     {% if user.is_authenticated %}
         <div class="container">
-            <div class="">
-                <table class="table">
+            <div class="row justify-content-center">
+                <table class="table w-auto">
                     <thead>
                       <tr>
                         <th scope="col">Ticket</th>
                         <th scope="col">Compra</th>
-                        <th scope="col">Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -17,14 +23,13 @@
                           {% comment %} <th scope="row">{{ forloop.counter }}</th> {% endcomment %}
                           <td>{{ ticket.codigo }}</td>
                           <td>{{ ticket.compra }}</td>
-                          <td>Activo</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                   </table>
             </div>
-            <div>
-                <a class="text-white" href="/compras/">
+            <div class="row justify-content-center">
+                <a class="text-white w-auto" href="/compras/">
                     <button type="button" class="btn btn-outline-primary">Cancelar Compras</button>
                 </a>
             </div>
